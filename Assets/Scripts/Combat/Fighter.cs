@@ -10,10 +10,13 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
+        [SerializeField] float weaponDamage = 10f;
+        [SerializeField] float timeBetweenAttacks = 1f;
 
-        Transform currentTarget = null;
+        Health currentTarget = null;
         Mover mover;
         Animator animator;
+        float timeSinceLastAttacked = Mathf.Infinity;
 
         private void Start()
         {
@@ -23,53 +26,72 @@ namespace RPG.Combat
 
         private void Update()
         {
-            if (currentTarget == null) return;
+            timeSinceLastAttacked += Time.deltaTime;
 
-            if (!IsInRange())
+            if (currentTarget == null) return;
+            if (currentTarget.IsDead())
             {
-                mover.MoveTo(currentTarget.position);
-            } else
+                Cancel();
+                return;
+            }
+
+            if (!GetIsInRange())
+            {
+                mover.MoveTo(currentTarget.transform.position);
+            }
+            else
             {
                 mover.Cancel();
+                transform.LookAt(currentTarget.transform.position);
                 StartAttackBehavior();
             }
+
+
         }
 
         private void StartAttackBehavior()
         {
-            //animator.ResetTrigger("stopAttacking");
-            animator.SetTrigger("attack");
-        }
-
-        private bool IsInRange()
-        {
-            float distanceBetweenCharacters = Vector3.Distance(this.transform.position, currentTarget.transform.position);
-            if (distanceBetweenCharacters < weaponRange) {
-                return true;
+            if (timeSinceLastAttacked > timeBetweenAttacks)
+            {
+                StartAttack();
+                timeSinceLastAttacked = 0;
             }
-            return false;
         }
 
-        public void Attack(CombatTarget target)
+        private bool GetIsInRange()
+        {
+            return Vector3.Distance(this.transform.position, currentTarget.transform.position) < weaponRange;
+
+        }
+
+        public void Attack(CombatTarget combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            currentTarget = target.transform;
-            mover.MoveTo(currentTarget.position);
+            currentTarget = combatTarget.GetComponent<Health>();
         }
 
         void Hit()
         {
-            if (currentTarget != null)
-            {
-                print("Doing Damage");
-            }
-
+            if (currentTarget == null) return;  
+            currentTarget.TakeDamage(weaponDamage);
         }
 
         public void Cancel()
         {
-            animator.SetTrigger("stopAttacking");
-            //animator.ResetTrigger("attack");
+            StopAttack();
+            currentTarget = null;
+        }
+
+        private void StartAttack()
+        {
+            animator.ResetTrigger("stopAttack");
+            animator.SetTrigger("attack");
+        }
+
+        private void StopAttack()
+        {
+            animator.ResetTrigger("attack");
+            animator.SetTrigger("stopAttack");
         }
     }
 }

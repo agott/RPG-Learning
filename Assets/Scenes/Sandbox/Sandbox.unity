@@ -895,6 +895,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 403649437933480654, guid: 3725684f230964846a3ac797d92564b9, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325355747733044081, guid: 3725684f230964846a3ac797d92564b9, type: 3}
+      propertyPath: weaponDamage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8228243706273075882, guid: 3725684f230964846a3ac797d92564b9, type: 3}
       propertyPath: m_Name
       value: Player

@@ -38,11 +38,13 @@ namespace RPG.Control
             {
                 if (hit.transform.GetComponent<CombatTarget>())
                 {
+                    if (hit.transform.GetComponent<Health>().IsDead()) continue;
+
                     if (Input.GetMouseButton(0))
                     {
                         fighter.Attack(hit.transform.GetComponent<CombatTarget>());
-                        return true;
                     }
+                    return true;
                 }
             }
             return false;
