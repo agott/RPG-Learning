@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2164477629248300763}
   - component: {fileID: 2164477629248300767}
   - component: {fileID: 7612017850509713081}
+  - component: {fileID: 6888963315213085016}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2164477629248300765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -14.77}
+  m_LocalPosition: {x: 0, y: 0, z: -14.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,7 +49,7 @@ CapsuleCollider:
   m_Radius: 0.25
   m_Height: 1.88
   m_Direction: 1
-  m_Center: {x: 0, y: -0.12, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &2164477629248300764
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.87
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &2164477629248300763
@@ -112,5 +113,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11d11dc6ccf937c458b7cf5a35f77c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fightRange: 1
+--- !u!114 &6888963315213085016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2164477629248300765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee68db80919964418d779efbd947d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
