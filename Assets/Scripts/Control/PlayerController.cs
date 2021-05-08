@@ -42,7 +42,7 @@ namespace RPG.Control
 
                     if (Input.GetMouseButton(0))
                     {
-                        fighter.Attack(hit.transform.GetComponent<CombatTarget>());
+                        fighter.Attack(hit.transform.GetComponent<Health>());
                     }
                     return true;
                 }
