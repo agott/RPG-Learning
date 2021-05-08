@@ -4,50 +4,77 @@ using UnityEngine;
 using UnityEngine.AI;
 using RPG.Combat;
 using RPG.Movement;
+using RPG.Core;
 
 namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float detectRange = 10f;
+        [SerializeField] float chaseDistance = 1f;
+        [SerializeField] float suspicionTime = 2f;
 
         Mover mover;
         Fighter fighter;
-        Animator animator;
-        NavMeshAgent navMeshAgent;
+        Health health;
         GameObject player;
-        Vector3 startLocation;
+        Vector3 guardPosition;
+        float timeSinceLastSeenPlayer = Mathf.Infinity;
 
         void Start()
         {
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
-            animator = GetComponent<Animator>();
-            navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
-            startLocation = transform.position;
+            guardPosition = transform.position;
         }
 
         void Update()
         {
-            if (WithinRange())
+            if (health.IsDead()) return;
+
+            if (InAttackRange(player) && fighter.CanAttack(player))
             {
-                fighter.Attack(player.GetComponent<Health>());
-            }else
-            {
-                mover.StartMoveAction(startLocation);
+                timeSinceLastSeenPlayer = 0;
+                AttackBehavior();
             }
+            else if(timeSinceLastSeenPlayer < suspicionTime)
+            {
+                SuspicionBehavior();
+            }
+            else
+            {
+                GuardBehavior();
+            }
+
+            timeSinceLastSeenPlayer += Time.deltaTime;
         }
 
-        private bool WithinRange()
+        private void SuspicionBehavior()
         {
-            return Vector3.Distance(transform.position, player.transform.position) < detectRange;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        private void AttackBehavior()
+        {
+            fighter.Attack(player.gameObject);
+        }
+
+        private void GuardBehavior()
+        {
+            mover.StartMoveAction(guardPosition);
+        }
+
+        private bool InAttackRange(GameObject player)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            return distanceToPlayer < chaseDistance;
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, detectRange);
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
     }
 }

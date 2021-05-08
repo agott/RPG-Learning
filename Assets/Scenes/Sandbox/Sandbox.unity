@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4562000915525819855, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
+      propertyPath: weaponDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5252866918723085739, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -180,6 +184,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8070325980524381256, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
       propertyPath: detectRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070325980524381256, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
+      propertyPath: chaseDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070325980524381256, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
+      propertyPath: suspicionTime
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []

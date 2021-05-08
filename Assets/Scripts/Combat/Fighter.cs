@@ -14,6 +14,7 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
 
         Health currentTarget = null;
+        Health health;
         Mover mover;
         Animator animator;
         float timeSinceLastAttacked = Mathf.Infinity;
@@ -22,6 +23,7 @@ namespace RPG.Combat
         {
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
+            health = GetComponent<Health>();
         }
 
         private void Update()
@@ -42,18 +44,18 @@ namespace RPG.Combat
             else
             {
                 mover.Cancel();
-                transform.LookAt(currentTarget.transform.position);
-                StartAttackBehavior();
+                AttackBehavior();
             }
 
 
         }
 
-        private void StartAttackBehavior()
+        private void AttackBehavior()
         {
+            transform.LookAt(currentTarget.transform.position);
             if (timeSinceLastAttacked > timeBetweenAttacks)
             {
-                StartAttack();
+                TriggerAttack();
                 timeSinceLastAttacked = 0;
             }
         }
@@ -64,7 +66,14 @@ namespace RPG.Combat
 
         }
 
-        public void Attack(Health combatTarget)
+        public bool CanAttack(GameObject combatTarget)
+        {
+            if (combatTarget == null) return false;
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return targetToTest != null && !targetToTest.IsDead();
+        }
+
+        public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
             currentTarget = combatTarget.GetComponent<Health>();
@@ -82,7 +91,7 @@ namespace RPG.Combat
             currentTarget = null;
         }
 
-        private void StartAttack()
+        private void TriggerAttack()
         {
             animator.ResetTrigger("stopAttack");
             animator.SetTrigger("attack");

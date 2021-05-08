@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
+using RPG.Core;
 using System;
-using UnityEngine.AI;
 
 namespace RPG.Control
 {
@@ -12,20 +12,20 @@ namespace RPG.Control
     {
         Mover mover;
         Fighter fighter;
-        Animator animator;
-        NavMeshAgent navMeshAgent;
+        Health health;
         Ray ray;
 
         void Start()
         {
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
-            animator = GetComponent<Animator>();
-            navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<Health>();
         }
 
         void Update()
         {
+            if (health.IsDead()) return;
+
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
         }
@@ -36,16 +36,16 @@ namespace RPG.Control
             RaycastHit[] hits = Physics.RaycastAll(ray.origin, ray.direction);
             foreach (RaycastHit hit in hits)
             {
-                if (hit.transform.GetComponent<CombatTarget>())
-                {
-                    if (hit.transform.GetComponent<Health>().IsDead()) continue;
+                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
+                if (target == null) continue;
 
-                    if (Input.GetMouseButton(0))
-                    {
-                        fighter.Attack(hit.transform.GetComponent<Health>());
-                    }
-                    return true;
+                if (!fighter.CanAttack(target.gameObject)) continue;
+
+                if (Input.GetMouseButton(0))
+                {
+                    fighter.Attack(target.gameObject);
                 }
+                return true;
             }
             return false;
 
