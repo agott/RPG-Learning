@@ -15,11 +15,14 @@ namespace RPG.Control
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float withinRangeOfWaypoint = .5f;
         [SerializeField] float dwellTime = 2f;
+        [SerializeField] float attackSpeed = 3f;
+        [SerializeField] float patrolSpeed = 1.5f;
 
         Mover mover;
         Fighter fighter;
         Health health;
         GameObject player;
+        NavMeshAgent navMeshAgent;
         Vector3 guardPosition;
         int currentWaypoint = 0;
         float timeSinceLastSeenPlayer = Mathf.Infinity;
@@ -31,6 +34,7 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
+            navMeshAgent = GetComponent<NavMeshAgent>();
             guardPosition = transform.position;
         }
 
@@ -69,10 +73,12 @@ namespace RPG.Control
         {
             timeSinceLastSeenPlayer = 0;
             fighter.Attack(player.gameObject);
+            navMeshAgent.speed = attackSpeed;
         }
 
         private void PatrolBehavior()
         {
+            navMeshAgent.speed = patrolSpeed;
             Vector3 nextPosition = guardPosition;
 
             if (patrolPath != null)
