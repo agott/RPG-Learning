@@ -3906,6 +3906,7 @@ GameObject:
   - component: {fileID: 1330898848}
   - component: {fileID: 1330898850}
   - component: {fileID: 1330898849}
+  - component: {fileID: 1330898851}
   m_Layer: 2
   m_Name: Intro Sequence
   m_TagString: Untagged
@@ -4000,6 +4001,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1330898851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330898845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145d1d00d30747e4fba752871e942953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1349731652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5975,18 +5988,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 376443561}
     m_Modifications:
-    - target: {fileID: 403649437933480654, guid: 3725684f230964846a3ac797d92564b9, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 875210439418663221, guid: 3725684f230964846a3ac797d92564b9, type: 3}
-      propertyPath: health
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7325355747733044081, guid: 3725684f230964846a3ac797d92564b9, type: 3}
-      propertyPath: weaponDamage
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 8228243706273075882, guid: 3725684f230964846a3ac797d92564b9, type: 3}
       propertyPath: m_Name
       value: Player

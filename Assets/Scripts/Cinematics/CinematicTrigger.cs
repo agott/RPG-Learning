@@ -5,11 +5,18 @@ using UnityEngine.Playables;
 
 namespace RPG.Cinematics
 {
+
     public class CinematicTrigger : MonoBehaviour
     {
+        bool hasTriggered = false;
         private void OnTriggerEnter(Collider other)
         {
-            GetComponent<PlayableDirector>().Play();
+            if (!hasTriggered && other.gameObject.tag == "Player")
+            {
+                hasTriggered = true;
+                GetComponent<PlayableDirector>().Play();
+            }
+
         }
     }
 }
