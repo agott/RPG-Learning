@@ -8,8 +8,14 @@ namespace RPG.SceneManagement
 {
     public class Portal : MonoBehaviour
     {
-        [SerializeField] int sceneToLoad = 0;
+        enum DestinationIdentifier { A, B, C, D, E };
+
+        [SerializeField] int sceneToLoad = -1;
         [SerializeField] Transform spawnPoint;
+        [SerializeField] DestinationIdentifier portalID;
+        [SerializeField] float fadeOutTime = 2f;
+        [SerializeField] float fadeInTime = 1f;
+        [SerializeField] float fadeWaitTime = .1f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -21,12 +27,24 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition()
         {
+            if (sceneToLoad < 0)
+            {
+                Debug.LogError("No Scene Set");
+                yield break;
+            }
+
             DontDestroyOnLoad(gameObject);
+
+            Fader fader = FindObjectOfType<Fader>().GetComponent<Fader>();
+
+            yield return fader.FadeOut(fadeOutTime);
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
 
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+            yield return new WaitForSeconds(fadeWaitTime);
+            yield return fader.FadeIn(fadeInTime);
 
             Destroy(gameObject);
         }
@@ -38,6 +56,8 @@ namespace RPG.SceneManagement
             {
                 if (portal == this) continue;
 
+                if (portal.portalID != portalID) continue;
+                
                 return portal;
             }
             return null;
