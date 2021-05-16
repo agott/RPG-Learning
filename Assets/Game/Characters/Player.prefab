@@ -360,6 +360,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2513092605434429163, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
+      propertyPath: uniqueIdentifier
+      value: player
+      objectReference: {fileID: 0}
     - target: {fileID: 6925414313307710786, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
       propertyPath: health
       value: 1000
