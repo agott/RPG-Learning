@@ -57,8 +57,6 @@ namespace RPG.Saving
                 serializedObject.ApplyModifiedProperties();
             }
             globalLookup[property.stringValue] = this;
-
-            print("Updating");
         }
 #endif
         private bool IsUnique(string candidate)

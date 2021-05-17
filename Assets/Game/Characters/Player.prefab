@@ -293,6 +293,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+--- !u!4 &6445968981195223924 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 403948, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+  m_PrefabInstance: {fileID: 6445968981195348632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6445968981195150108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 461188, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+  m_PrefabInstance: {fileID: 6445968981195348632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7798366354735625335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,6 +382,26 @@ PrefabInstance:
       propertyPath: weaponDamage
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 7612017850509713081, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
+      propertyPath: weaponPrefab
+      value: 
+      objectReference: {fileID: 4444296529144216088, guid: 04c67a73c59ddaa46853ba66defc3a21, type: 3}
+    - target: {fileID: 7612017850509713081, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
+      propertyPath: weaponLocation
+      value: 
+      objectReference: {fileID: 6445968981195150108}
+    - target: {fileID: 7612017850509713081, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
+      propertyPath: animationOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 04956d26ad3a22c4ea1328a0811113b4, type: 2}
+    - target: {fileID: 7612017850509713081, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
+      propertyPath: leftHandTransform
+      value: 
+      objectReference: {fileID: 6445968981195223924}
+    - target: {fileID: 7612017850509713081, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
+      propertyPath: rightHandTransform
+      value: 
+      objectReference: {fileID: 6445968981195150108}
     - target: {fileID: 7612017850509713081, guid: 185c6417484c0b04ab3449c9b3041556, type: 3}
       propertyPath: timeBetweenAttacks
       value: 0.2

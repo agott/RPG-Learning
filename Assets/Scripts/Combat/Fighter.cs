@@ -9,14 +9,16 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] float weaponRange = 2f;
-        [SerializeField] float weaponDamage = 10f;
         [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
+        [SerializeField] Weapon defaultWeapon = null;
 
         Health currentTarget = null;
         Health health;
         Mover mover;
         Animator animator;
+        Weapon currentWeapon = null;
         float timeSinceLastAttacked = Mathf.Infinity;
 
         private void Start()
@@ -24,6 +26,13 @@ namespace RPG.Combat
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
             health = GetComponent<Health>();
+            EquipWeapon(defaultWeapon);
+        }
+
+        public void EquipWeapon(Weapon weaponToSpawn)
+        {
+            currentWeapon = weaponToSpawn;
+            weaponToSpawn.Spawn(rightHandTransform, leftHandTransform, animator);
         }
 
         private void Update()
@@ -50,6 +59,7 @@ namespace RPG.Combat
 
         }
 
+
         private void AttackBehavior()
         {
             transform.LookAt(currentTarget.transform.position);
@@ -62,7 +72,7 @@ namespace RPG.Combat
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(this.transform.position, currentTarget.transform.position) < weaponRange;
+            return Vector3.Distance(this.transform.position, currentTarget.transform.position) < currentWeapon.GetWeaponRange();
 
         }
 
@@ -82,7 +92,20 @@ namespace RPG.Combat
         void Hit()
         {
             if (currentTarget == null) return;  
-            currentTarget.TakeDamage(weaponDamage);
+
+            if (currentWeapon.HasProjectile())
+            {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget);
+            }
+            else
+            {
+                currentTarget.TakeDamage(currentWeapon.GetWeaponDamage());
+            }
+        }
+
+        void Shoot()
+        {
+            Hit();
         }
 
         public void Cancel()
