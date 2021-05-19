@@ -195,6 +195,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7f49c6920d49ba468b083941d79f2c0, type: 3}
+--- !u!1 &3912030875449732523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1659504181823486, guid: c7f49c6920d49ba468b083941d79f2c0, type: 3}
+  m_PrefabInstance: {fileID: 3913546806088723029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8464224406762260761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250,6 +255,14 @@ PrefabInstance:
       propertyPath: speed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1824506807917626567, guid: ec979094a57eb7b41819b40472844218, type: 3}
+      propertyPath: objectsToDestroy.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824506807917626567, guid: ec979094a57eb7b41819b40472844218, type: 3}
+      propertyPath: objectsToDestroy.Array.data[0]
+      value: 
+      objectReference: {fileID: 3912030875449732523}
     - target: {fileID: 6705825331622207581, guid: ec979094a57eb7b41819b40472844218, type: 3}
       propertyPath: m_Size.x
       value: 0.04
@@ -268,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7451514748163557180, guid: ec979094a57eb7b41819b40472844218, type: 3}
       propertyPath: m_Name
-      value: Arrow
+      value: Heat Seeking Arrow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec979094a57eb7b41819b40472844218, type: 3}

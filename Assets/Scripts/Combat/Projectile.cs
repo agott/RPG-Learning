@@ -1,4 +1,5 @@
 using RPG.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,21 +10,28 @@ namespace RPG.Combat
     {
         [SerializeField] float speed = 1f;
         [SerializeField] bool isHeatSeeking = true;
+        [SerializeField] GameObject impactEffect = null;
+        [SerializeField] GameObject[] objectsToDestroy = null;
+        [SerializeField] float timeTillDestroy = 2f;
 
         Health target = null;
         float givenDamage = 0;
-        bool hasTarget = false;
+
+        private void Start()
+        {
+            transform.LookAt(GetAimLocation());
+            StartCoroutine(DieAfterTime());
+        }
+
 
         private void Update()
         {
             if (target == null) return;
 
-            if (hasTarget && !isHeatSeeking)
+            if (isHeatSeeking && !target.IsDead())
             {
-                transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                return;
+                transform.LookAt(GetAimLocation());
             }
-            transform.LookAt(GetAimLocation());
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
 
@@ -37,13 +45,27 @@ namespace RPG.Combat
         {
             if (other.GetComponent<Health>() != target) return;
 
+            if (target.IsDead()) return;
+
             target.TakeDamage(givenDamage);
-            Destroy(gameObject);
+
+            speed = 0;
+
+            if (impactEffect != null)
+            {
+                Instantiate(impactEffect, transform.position, transform.rotation);
+            }
+
+            foreach (GameObject objectToDestroy in objectsToDestroy)
+            {
+                Destroy(objectToDestroy);
+            }
+
+            Destroy(gameObject, timeTillDestroy);
         }
 
         private Vector3 GetAimLocation()
         {
-            hasTarget = true;
             CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
 
             if (targetCapsule == null)
@@ -52,6 +74,13 @@ namespace RPG.Combat
             }
 
             return target.transform.position + Vector3.up * targetCapsule.height / 1.4f;
+        }
+
+
+        private IEnumerator DieAfterTime()
+        {
+            yield return new WaitForSeconds(5f);
+            Destroy(gameObject);
         }
     }
 }

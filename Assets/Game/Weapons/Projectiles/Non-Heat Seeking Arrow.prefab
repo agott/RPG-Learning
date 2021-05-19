@@ -39,6 +39,14 @@ PrefabInstance:
       propertyPath: isHeatSeeking
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7793202107635977694, guid: 6adf11653a9ff1e49a082a6c2d275d70, type: 3}
+      propertyPath: objectsToDestroy.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793202107635977694, guid: 6adf11653a9ff1e49a082a6c2d275d70, type: 3}
+      propertyPath: objectsToDestroy.Array.data[0]
+      value: 
+      objectReference: {fileID: 3672671941289375810}
     - target: {fileID: 8918980135112411286, guid: 6adf11653a9ff1e49a082a6c2d275d70, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -85,3 +93,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6adf11653a9ff1e49a082a6c2d275d70, type: 3}
+--- !u!1 &3672671941289375810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3912030875449732523, guid: 6adf11653a9ff1e49a082a6c2d275d70, type: 3}
+  m_PrefabInstance: {fileID: 341606128336131561}
+  m_PrefabAsset: {fileID: 0}
