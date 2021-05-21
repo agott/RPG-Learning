@@ -21,7 +21,6 @@ namespace RPG.Combat
         {
             HidePickups();
             yield return new WaitForSeconds(2f);
-            print("Time Waited");
             ShowPickups();
         }
 

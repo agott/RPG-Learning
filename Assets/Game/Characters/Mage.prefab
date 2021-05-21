@@ -1,23 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4596266958726070920
+--- !u!1001 &6843533761180913050
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1532192047017197316, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
-    - target: {fileID: 4562000915525819855, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
-      propertyPath: defaultWeapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 739a3fba79da1394a8eebf9b7725802f, type: 2}
     - target: {fileID: 5252866918723085739, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
       propertyPath: m_Name
-      value: Archer
+      value: Mage
       objectReference: {fileID: 0}
     - target: {fileID: 5252866918723085742, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8777405766506720726, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}
       propertyPath: characterClass
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 922252a6617ecb34fbeb7f51395da445, type: 3}

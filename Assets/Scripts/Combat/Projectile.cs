@@ -1,4 +1,4 @@
-using RPG.Core;
+using RPG.Resources;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace RPG.Combat
 
         Health target = null;
         float givenDamage = 0;
+        GameObject instigator = null;
 
         private void Start()
         {
@@ -35,8 +36,9 @@ namespace RPG.Combat
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(Health target, float damage, GameObject instigator)
         {
+            this.instigator = instigator;
             this.target = target;
             givenDamage = damage;
         }
@@ -47,7 +49,7 @@ namespace RPG.Combat
 
             if (target.IsDead()) return;
 
-            target.TakeDamage(givenDamage);
+            target.TakeDamage(givenDamage, instigator);
 
             speed = 0;
 

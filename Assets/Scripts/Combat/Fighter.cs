@@ -5,6 +5,7 @@ using RPG.Movement;
 using RPG.Core;
 using System;
 using RPG.Saving;
+using RPG.Resources;
 
 namespace RPG.Combat
 {
@@ -13,21 +14,22 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
-        [SerializeField] Weapon defaultWeapon = null;
         [SerializeField] string defaultWeaponName = "Unarmed";
 
         Health currentTarget = null;
-        Health health;
         Mover mover;
         Animator animator;
         Weapon currentWeapon = null;
         float timeSinceLastAttacked = Mathf.Infinity;
 
-        private void Start()
+        private void Awake()
         {
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
-            health = GetComponent<Health>();
+        }
+
+        private void Start()
+        {
             if (currentWeapon == null)
             {
                 EquipWeapon(defaultWeaponName);
@@ -36,7 +38,7 @@ namespace RPG.Combat
 
         public void EquipWeapon(string weaponName)
         {
-            Weapon weaponToSpawn = Resources.Load<Weapon>(weaponName);
+            Weapon weaponToSpawn = UnityEngine.Resources.Load<Weapon>(weaponName);
             currentWeapon = weaponToSpawn;
             weaponToSpawn.Spawn(rightHandTransform, leftHandTransform, animator);
         }
@@ -101,11 +103,11 @@ namespace RPG.Combat
 
             if (currentWeapon.HasProjectile())
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, currentTarget, this.gameObject);
             }
             else
             {
-                currentTarget.TakeDamage(currentWeapon.GetWeaponDamage());
+                currentTarget.TakeDamage(currentWeapon.GetWeaponDamage(), this.gameObject);
             }
         }
 
@@ -119,6 +121,11 @@ namespace RPG.Combat
             StopAttack();
             currentTarget = null;
             mover.Cancel();
+        }
+
+        public Health CurrentTarget()
+        {
+            return currentTarget;
         }
 
         private void TriggerAttack()

@@ -1,4 +1,4 @@
-using RPG.Core;
+using RPG.Resources;
 using System;
 using UnityEngine;
 
@@ -55,10 +55,10 @@ namespace RPG.Combat
             Destroy(oldWeapon.gameObject);
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
         {
             Projectile instancedProjectile = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            instancedProjectile.SetTarget(target, weaponDamage);
+            instancedProjectile.SetTarget(target, weaponDamage, instigator);
         }
 
         public bool HasProjectile()
